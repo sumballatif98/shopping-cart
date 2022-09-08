@@ -8,6 +8,7 @@ export function ProductCard({ product }) {
   const [title, setTitle] = useState("");
   const [isToolTipMounted, setIsToolTipMounted] = useState(false);
 
+  const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,6 +18,13 @@ export function ProductCard({ product }) {
         : product.title
     );
   }, [product]);
+
+  function isProductInCart() {
+    let item = cart.find((item) => {
+      return item.details.id === product.id;
+    });
+    return item;
+  }
   return (
     <div
       className=" hover:shadow-2xl w-64 h-fit m-3 relative border border-gray-200 rounded-lg"
@@ -29,9 +37,6 @@ export function ProductCard({ product }) {
           src={product.thumbnail}
           layout="fill"
           objectFit="cover"
-          // width="300"
-          // height="200"
-          // loader={myLoader}
         ></Image>
       </div>
       <div className=" flex gap-4 ml-2">
@@ -59,12 +64,18 @@ export function ProductCard({ product }) {
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 ml-2 px-4 rounded">
           Details
         </button>
-        <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 ml-2 px-4 rounded"
-          onClick={() => dispatch(addInCart(product))}
-        >
-          Add to Cart
-        </button>
+        {isProductInCart() ? (
+          <button className="bg-gray-200 text-black py-1 ml-2 px-4 rounded">
+            Added in Cart
+          </button>
+        ) : (
+          <button
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-1 ml-2 px-4 rounded"
+            onClick={() => dispatch(addInCart(product))}
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );
