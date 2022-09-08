@@ -14,6 +14,7 @@ export function CartItem() {
 
   return cart.length ? (
     <div>
+      <CartHeader />
       {cart.map((item) => {
         return (
           <div
@@ -84,6 +85,21 @@ function Quantity({ item }) {
       >
         +
       </div>
+    </div>
+  );
+}
+
+function CartHeader() {
+  return (
+    <div className="flex justify-between mx-12 h-32 bg-gray-50 border border-gray-200 pr-3 my-2 items-center">
+      <div className=" flex gap-4 h-full">
+        <div className="relative w-24 rounded-lg "></div>
+        <div className=" text-lg font-bold flex items-center">Title</div>
+      </div>
+      <div className="text-lg font-bold ">Quantity</div>
+      <div className="text-lg font-bold ">Price</div>
+      <div className="text-lg font-bold ">Total Price</div>
+      <div className="font-bold ml-2 h-8 px-4 "></div>
     </div>
   );
 }
