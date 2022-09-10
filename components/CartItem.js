@@ -18,10 +18,10 @@ export function CartItem() {
       {cart.map((item) => {
         return (
           <div
-            className="flex justify-between mx-12 h-32 bg-gray-50 border border-gray-200 pr-3 my-2 items-center"
-            key={item.id}
+            className=" grid grid-cols-6 mx-12 h-32 bg-gray-50 border border-gray-200 pr-3 my-2 items-center "
+            key={item.details.id}
           >
-            <div className=" flex gap-4 h-full">
+            <div className=" flex gap-4 h-full col-span-2">
               <div className="relative w-24  bg-black rounded-lg ">
                 <Image
                   alt="Product info"
@@ -34,18 +34,12 @@ export function CartItem() {
               <div className=" text-lg font-bold flex items-center">
                 {item.details.title}
               </div>
-
-              <div className="flex flex-col justify-evenly">
-                {/* <div className=" break-all mb-3">
-                  {item.details.description}{" "}
-                </div> */}
-              </div>
             </div>
             <Quantity item={item} />
             <div>$ {item.details.price}</div>
             <div>$ {item.details.price * item.quantity}</div>
             <button
-              className="bg-white hover:bg-gray-200 text-red-600 font-bold ml-2 h-8 px-4 rounded border border-red-600"
+              className="bg-white hover:bg-gray-200 text-red-600 font-bold  w-fit ml-2 h-8 px-4 rounded border border-red-600"
               onClick={() => {
                 dispatch(removeProduct(item.details.id));
               }}
@@ -91,8 +85,8 @@ function Quantity({ item }) {
 
 function CartHeader() {
   return (
-    <div className="flex justify-between mx-12 h-32 bg-gray-50 border border-gray-200 pr-3 my-2 items-center">
-      <div className=" flex gap-4 h-full">
+    <div className="grid grid-cols-6 justify-between mx-12 h-32 bg-gray-50 border border-gray-200 pr-3 my-2 items-center">
+      <div className=" flex gap-4 h-full col-span-2">
         <div className="relative w-24 rounded-lg "></div>
         <div className=" text-lg font-bold flex items-center">Title</div>
       </div>
